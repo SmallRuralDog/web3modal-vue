@@ -8,6 +8,9 @@ Web3Modal is an easy-to-use library to help developers add support for multiple 
 
 By default Web3Modal Library supports injected providers like (**Metamask**, **Dapper**, **Gnosis Safe**, **Frame**, Web3 Browsers, etc) and **WalletConnect**, You can also easily configure the library to support **Portis**, **Fortmatic**, **Squarelink**, **Torus**, **Authereum**, **D'CENT Wallet** and **Arkane**.
 
+# React
+[web3modal](https://github.com/Web3Modal/web3modal)
+
 ## Usage
 
 1. Install Web3Modal NPM package
@@ -203,20 +206,23 @@ export default new Vuex.Store({
 
 These are all the providers available with Web3Modal and how to configure their provider options:
 
-- [WalletConnect](./docs/providers/walletconnect.md)
-- [Fortmatic](./docs/providers/fortmatic.md)
-- [Torus](./docs/providers/torus.md)
-- [Portis](./docs/providers/portis.md)
-- [Authereum](./docs/providers/authereum.md)
-- [Frame](./docs/providers/frame.md)
-- [Bitski](./docs/providers/bitski.md)
-- [Arkane](./docs/providers/arkane.md)
-- [DCent](./docs/providers/dcent.md)
-- [BurnerConnect](./docs/providers/burnerconnect.md)
-- [MEWConnect](./docs/providers/mewconnect.md)
+- [WalletConnect](https://github.com/Web3Modal/web3modal/docs/providers/walletconnect.md)
+- [Fortmatic](https://github.com/Web3Modal/web3modal/docs/providers/fortmatic.md)
+- [Torus](https://github.com/Web3Modal/web3modal/docs/providers/torus.md)
+- [Portis](https://github.com/Web3Modal/web3modal/docs/providers/portis.md)
+- [Authereum](https://github.com/Web3Modal/web3modal/docs/providers/authereum.md)
+- [Frame](https://github.com/Web3Modal/web3modal/docs/providers/frame.md)
+- [Bitski](https://github.com/Web3Modal/web3modal/docs/providers/bitski.md)
+- [Arkane](https://github.com/Web3Modal/web3modal/docs/providers/arkane.md)
+- [DCent](https://github.com/Web3Modal/web3modal/docs/providers/dcent.md)
+- [BurnerConnect](https://github.com/Web3Modal/web3modal/docs/providers/burnerconnect.md)
+- [MEWConnect](https://github.com/Web3Modal/web3modal/docs/providers/mewconnect.md)
 
 # Example
 [https://github.com/SmallRuralDog/web3modal-vue/tree/master/example](https://github.com/SmallRuralDog/web3modal-vue/tree/master/example)
+
+# Demo
+[https://smallruraldog.github.io/web3modal-vue](https://smallruraldog.github.io/web3modal-vue/#/)
 
 ## License
 
