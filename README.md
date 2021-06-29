@@ -199,5 +199,25 @@ export default new Vuex.Store({
 })
 ```
 
-# Demo
+## Provider Options
+
+These are all the providers available with Web3Modal and how to configure their provider options:
+
+- [WalletConnect](./docs/providers/walletconnect.md)
+- [Fortmatic](./docs/providers/fortmatic.md)
+- [Torus](./docs/providers/torus.md)
+- [Portis](./docs/providers/portis.md)
+- [Authereum](./docs/providers/authereum.md)
+- [Frame](./docs/providers/frame.md)
+- [Bitski](./docs/providers/bitski.md)
+- [Arkane](./docs/providers/arkane.md)
+- [DCent](./docs/providers/dcent.md)
+- [BurnerConnect](./docs/providers/burnerconnect.md)
+- [MEWConnect](./docs/providers/mewconnect.md)
+
+# Example
 [https://github.com/SmallRuralDog/web3modal-vue/tree/master/example](https://github.com/SmallRuralDog/web3modal-vue/tree/master/example)
+
+## License
+
+MIT
