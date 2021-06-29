@@ -198,3 +198,6 @@ export default new Vuex.Store({
     },
 })
 ```
+
+# Demo
+[https://github.com/SmallRuralDog/web3modal-vue/tree/master/example](https://github.com/SmallRuralDog/web3modal-vue/tree/master/example)
