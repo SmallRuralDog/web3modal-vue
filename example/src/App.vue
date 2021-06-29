@@ -1,35 +1,49 @@
 <template>
   <div id="app">
-
     <div>
-      <button @click="connect" v-if="!web3Modal.active">连接钱包</button>
+      <button @click="connect" v-if="!web3Modal.active">Connect</button>
       <div v-else>
         <div>{{ web3Modal.account }}</div>
+        <div>{{ number }}</div>
+        <div>
+          <button @click="getBalance">getBalance</button>
+          {{ balance }}
+        </div>
       </div>
     </div>
-
     <web3-modal-vue
         ref="web3modal"
         :theme="theme"
+        :provider-options="providerOptions"
         cache-provider
     />
   </div>
 </template>
 <script>
 import Web3ModalVue from "web3modal-vue";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import {mapState} from "vuex";
 
 export default {
   components: {
     Web3ModalVue
   },
   computed: {
-    web3Modal() {
-      return this.$store.state.web3Modal
-    },
+    ...mapState(['web3Modal'])
   },
   data() {
     return {
-      theme: 'light'
+      theme: 'light',
+      providerOptions: {
+        walletconnect: {
+          package: WalletConnectProvider,
+          options: {
+            infuraId: "-"
+          }
+        }
+      },
+      number: 0,
+      balance: 0,
     }
   },
   created() {
@@ -39,10 +53,15 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
+      this.number = await this.web3Modal.web3.eth.getBlockNumber()
+    })
+    this.$nextTick(async () => {
       const web3modal = this.$refs.web3modal;
       this.$store.commit('setWeb3Modal', web3modal)
       if (web3modal.cacheProvider) {
+        console.log(web3modal.cacheProvider)
         await this.$store.dispatch('connect')
+        this.subscribeMewBlockHeaders()
       }
 
     })
@@ -50,6 +69,19 @@ export default {
   methods: {
     async connect() {
       await this.$store.dispatch('connect')
+      this.subscribeMewBlockHeaders()
+    },
+    subscribeMewBlockHeaders() {
+      this.web3Modal.web3.eth.subscribe('newBlockHeaders', (err, block) => {
+        this.number = block.number
+      })
+    },
+    async getBalance() {
+      let balance = await this.web3Modal.web3.eth.getBalance(this.web3Modal.account)
+
+      this.balance = this.web3Modal.web3.utils.fromWei(balance)
+
+      console.log(this.balance)
     }
   }
 }

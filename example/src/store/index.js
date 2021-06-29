@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Web3 from "web3";
+import {getWeb3NoAccount} from "@/utils/web3";
 
 Vue.use(Vuex)
 
@@ -8,7 +9,7 @@ export default new Vuex.Store({
     state: {
         web3Modal: {
             web3Modal: null,
-            web3: null,
+            web3: getWeb3NoAccount(),
             active: false,
             account: null,
             chainId: 0,
@@ -64,9 +65,13 @@ export default new Vuex.Store({
 
         },
         async resetApp({state, commit}) {
-            await state.web3Modal.web3Modal.clearCachedProvider();
+            try {
+                await state.web3Modal.web3Modal.clearCachedProvider();
+            } catch (error) {
+                console.error(error)
+            }
+            commit('setAccount', null)
             commit('setActive', false)
-        }
-    },
-    modules: {}
+        },
+    }
 })
