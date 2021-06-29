@@ -218,6 +218,10 @@ These are all the providers available with Web3Modal and how to configure their 
 - [BurnerConnect](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/burnerconnect.md)
 - [MEWConnect](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/mewconnect.md)
 
+# Who using it
+
+[Submit my Dapp](https://github.com/SmallRuralDog/web3modal-vue/issues/1)
+
 # Example
 [https://github.com/SmallRuralDog/web3modal-vue/tree/master/example](https://github.com/SmallRuralDog/web3modal-vue/tree/master/example)
 
