@@ -206,17 +206,17 @@ export default new Vuex.Store({
 
 These are all the providers available with Web3Modal and how to configure their provider options:
 
-- [WalletConnect](https://github.com/Web3Modal/web3modal/docs/providers/walletconnect.md)
-- [Fortmatic](https://github.com/Web3Modal/web3modal/docs/providers/fortmatic.md)
-- [Torus](https://github.com/Web3Modal/web3modal/docs/providers/torus.md)
-- [Portis](https://github.com/Web3Modal/web3modal/docs/providers/portis.md)
-- [Authereum](https://github.com/Web3Modal/web3modal/docs/providers/authereum.md)
-- [Frame](https://github.com/Web3Modal/web3modal/docs/providers/frame.md)
-- [Bitski](https://github.com/Web3Modal/web3modal/docs/providers/bitski.md)
-- [Arkane](https://github.com/Web3Modal/web3modal/docs/providers/arkane.md)
-- [DCent](https://github.com/Web3Modal/web3modal/docs/providers/dcent.md)
-- [BurnerConnect](https://github.com/Web3Modal/web3modal/docs/providers/burnerconnect.md)
-- [MEWConnect](https://github.com/Web3Modal/web3modal/docs/providers/mewconnect.md)
+- [WalletConnect](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/walletconnect.md)
+- [Fortmatic](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/fortmatic.md)
+- [Torus](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/torus.md)
+- [Portis](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/portis.md)
+- [Authereum](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/authereum.md)
+- [Frame](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/frame.md)
+- [Bitski](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/bitski.md)
+- [Arkane](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/arkane.md)
+- [DCent](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/dcent.md)
+- [BurnerConnect](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/burnerconnect.md)
+- [MEWConnect](https://github.com/Web3Modal/web3modal/blob/master/docs/providers/mewconnect.md)
 
 # Example
 [https://github.com/SmallRuralDog/web3modal-vue/tree/master/example](https://github.com/SmallRuralDog/web3modal-vue/tree/master/example)
