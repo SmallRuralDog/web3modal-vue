@@ -56,26 +56,20 @@ export default {
       userOptions: [],
     }
   },
-  mounted() {
+  created() {
     this.eventController = new EventController();
-
     this.themeColors = getThemeColors(this.theme);
-
     this.providerController = new ProviderController({
       disableInjectedProvider: this.disableInjectedProvider,
       cacheProvider: this.cacheProvider,
       providerOptions: this.providerOptions,
       network: this.network
     })
-
     this.providerController.on(CONNECT_EVENT, provider =>
         this.onConnect(provider)
     );
     this.providerController.on(ERROR_EVENT, error => this.onError(error));
-
     this.userOptions = this.providerController.getUserOptions();
-
-
   },
   computed: {
     cachedProvider() {
