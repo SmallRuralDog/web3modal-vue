@@ -41,10 +41,9 @@ import {
   MODAL_HITBOX_CLASSNAME,
   MODAL_CARD_CLASSNAME
 } from "../constants";
-import Provider from "./Provider";
+import Provider from "./Provider.vue";
 
 const SLightbox = styled('div', {offset: Number, opacity: Number, show: Boolean})`
-
   text-align: center;
   position: fixed;
   width: 100vw;

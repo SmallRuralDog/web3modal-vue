@@ -15,10 +15,10 @@ import {CLOSE_EVENT, CONNECT_EVENT, ERROR_EVENT} from "./constants";
 import {getThemeColors} from "./helpers";
 
 import {themesList} from "./themes";
-import Modal from "./components/Modal";
+import Modal from "./components/Modal.vue";
 
 export default {
-  name: "index",
+  name: "Web3ModalVue",
   components: {Modal},
   props: {
     lightboxOpacity: {
@@ -167,7 +167,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

@@ -38,6 +38,9 @@ export const removeLocal = (key) => {
 
 export const updateLocal = (key, data) => {
     const localData = getLocal(key) || {};
-    const mergedData = {...localData, ...data};
+    const mergedData = {
+        ...localData,
+        ...data
+    };
     setLocal(key, mergedData);
 };

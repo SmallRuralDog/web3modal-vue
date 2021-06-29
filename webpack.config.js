@@ -1,19 +1,11 @@
-const path = require("path");
+var path = require('path')
+var merge = require('webpack-merge')
 
-module.exports = {
-    mode: "production",
-    entry: {
-        index: "./src/index.js"
-    },
+module.exports = merge.smart(require(path.resolve(__dirname, './conf/webpack.js')), {
+    entry: path.resolve(__dirname, './src/index.js'),
     output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name].js",
-        library: "Web3ModalVue",
-        umdNamedDefine: true,
-        globalObject: "this"
-    },
-    resolve: {
-        extensions: [".js"]
-    },
-    devtool: "source-map",
-};
+        path: path.resolve(__dirname, './dist'),
+        publicPath: path.resolve(__dirname, './dist'),
+        filename: 'web3-modal-vue.js'
+    }
+})

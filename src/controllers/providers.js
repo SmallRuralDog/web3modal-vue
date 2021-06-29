@@ -14,26 +14,13 @@ import {
 import {EventController} from "./events";
 
 export class ProviderController {
-    cachedProvider = "";
-    shouldCacheProvider = false;
-    disableInjectedProvider = false;
-
-    eventController = new EventController();
-    injectedProvider = null;
-    providers = [];
-    providerOptions;
-    network = "";
-
     constructor(opts) {
-
-
+        this.eventController = new EventController();
         this.cachedProvider = getLocal(CACHED_PROVIDER_KEY) || "";
-
         this.disableInjectedProvider = opts.disableInjectedProvider;
         this.shouldCacheProvider = opts.cacheProvider;
         this.providerOptions = opts.providerOptions;
         this.network = opts.network;
-
         this.injectedProvider = getInjectedProvider();
 
 
@@ -111,7 +98,7 @@ export class ProviderController {
         return false;
     }
 
-    getUserOptions = () => {
+    getUserOptions() {
         const mobile = isMobile();
 
         const defaultProviderList = this.providers.map(({id}) => id);
@@ -184,7 +171,7 @@ export class ProviderController {
         setLocal(CACHED_PROVIDER_KEY, id);
     }
 
-    connectTo = async (id, connector) => {
+    async connectTo(id, connector) {
         try {
             const providerPackage = this.getProviderOption(id, "package");
             const providerOptions = this.getProviderOption(id, "options");
