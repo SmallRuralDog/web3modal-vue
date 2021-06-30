@@ -1,16 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <button @click="connect" v-if="!web3Modal.active">Connect</button>
-      <div v-else>
-        <div>{{ web3Modal.account }}</div>
-        <div>{{ web3Modal.chainId }}</div>
-        <div>{{ number }}</div>
-        <div>
-          <button @click="getBalance">getBalance</button>
-          {{ balance }}
-        </div>
-      </div>
+      <router-view/>
     </div>
     <web3-modal-vue
         ref="web3modal"
@@ -84,4 +75,9 @@ export default {
   }
 }
 </script>
-
+<style lang="scss">
+html, body {
+  margin: 0;
+  padding: 0;
+}
+</style>
