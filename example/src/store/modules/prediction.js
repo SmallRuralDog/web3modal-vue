@@ -72,7 +72,7 @@ const predictionStore = {
         },
         async getLatestOraclePrice({commit}) {
             const contract = getOracleContract()
-            const response = await contract.latestRoundData()
+            const response = await contract['latestRoundData']()
             const price = getBalanceAmount(new BigNumber(response[1].toString()), 8)
             commit('setPrice', price)
         }

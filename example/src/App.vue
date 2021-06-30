@@ -45,9 +45,7 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(async () => {
-      this.number = await this.web3Modal.library.getBlockNumber()
-    })
+
     this.$nextTick(async () => {
       const web3modal = this.$refs.web3modal;
       this.$store.commit('setWeb3Modal', web3modal)
@@ -59,20 +57,10 @@ export default {
     })
   },
   methods: {
-    async connect() {
-      await this.$store.dispatch('connect')
-      this.subscribeMewBlockHeaders()
-    },
-    subscribeMewBlockHeaders() {
+    connect() {
+      this.$store.dispatch('connect')
 
     },
-    async getBalance() {
-      let balance = await this.web3Modal.web3.eth.getBalance(this.web3Modal.account)
-
-      this.balance = this.web3Modal.web3.utils.fromWei(balance)
-
-      console.log(this.balance)
-    }
   }
 }
 </script>

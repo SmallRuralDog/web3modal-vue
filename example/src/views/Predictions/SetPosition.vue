@@ -9,7 +9,8 @@
         <v-slider :min="0" :max="1000" :step="100" ticks thumb-label/>
       </div>
       <div>
-        <v-btn block large color="primary" @click="bet" :disabled="value<=0">提交</v-btn>
+        <v-btn v-if="web3Modal.active" block large color="primary" @click="bet" :disabled="value<=0">提交</v-btn>
+        <v-btn v-else block large color="primary" @click="$store.dispatch('connect')" >连接钱包</v-btn>
       </div>
       <div>You won’t be able to remove or change your position once you enter it.</div>
     </div>
@@ -38,7 +39,6 @@ export default {
     async bet() {
       try {
         const contract = getPredictionsContract();
-        console.log(contract)
         const tx = await contract['betBull']({
           gasPrice,
           value: utils.toWei(this.value.toString())

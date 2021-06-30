@@ -74,6 +74,7 @@ const web3ModalStore = {
             }
             commit('setAccount', null)
             commit('setActive', false)
+            commit('setLibrary', getLibrary())
         },
     }
 }

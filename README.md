@@ -34,17 +34,6 @@ yarn add web3modal-vue
 ```vue
 <template>
   <div id="app">
-    <div>
-      <button @click="connect" v-if="!web3Modal.active">Connect</button>
-      <div v-else>
-        <div>{{ web3Modal.account }}</div>
-        <div>{{ number }}</div>
-        <div>
-          <button @click="getBalance">getBalance</button>
-          {{ balance }}
-        </div>
-      </div>
-    </div>
     <web3-modal-vue
         ref="web3modal"
         :theme="theme"
@@ -56,15 +45,15 @@ yarn add web3modal-vue
 <script>
 import Web3ModalVue from "web3modal-vue";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import {mapState} from "vuex";
+import {web3Modal} from "./config/mixins";
+import Header from "@/components/Header";
 
 export default {
   components: {
+    Header,
     Web3ModalVue
   },
-  computed: {
-    ...mapState(['web3Modal'])
-  },
+  mixins: [web3Modal],
   data() {
     return {
       theme: 'light',
@@ -87,13 +76,9 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      this.number = await this.web3Modal.web3.eth.getBlockNumber()
-    })
-    this.$nextTick(async () => {
       const web3modal = this.$refs.web3modal;
       this.$store.commit('setWeb3Modal', web3modal)
-      if (web3modal.cacheProvider) {
-        console.log(web3modal.cacheProvider)
+      if (web3modal.cachedProvider) {
         await this.$store.dispatch('connect')
         this.subscribeMewBlockHeaders()
       }
@@ -101,76 +86,65 @@ export default {
     })
   },
   methods: {
-    async connect() {
-      await this.$store.dispatch('connect')
-      this.subscribeMewBlockHeaders()
+    connect() {
+      this.$store.dispatch('connect')
     },
-    subscribeMewBlockHeaders() {
-      this.web3Modal.web3.eth.subscribe('newBlockHeaders', (err, block) => {
-        this.number = block.number
-      })
-    },
-    async getBalance() {
-      let balance = await this.web3Modal.web3.eth.getBalance(this.web3Modal.account)
-
-      this.balance = this.web3Modal.web3.utils.fromWei(balance)
-
-      console.log(this.balance)
-    }
   }
 }
 </script>
 ```
 
 ```js
-import Vue from 'vue'
-import Vuex from 'vuex'
-import Web3 from "web3";
-import {getWeb3NoAccount} from "@/utils/web3";
+import {getLibrary} from "@/utils/web3";
+import {ethers} from "ethers";
+import {parseInt} from 'lodash'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+const web3ModalStore = {
     state: {
-        web3Modal: {
-            web3Modal: null,
-            web3: getWeb3NoAccount(),
-            active: false,
-            account: null,
-            chainId: 0,
-        }
+        web3Modal: null,
+
+        library: getLibrary(),
+        active: false,
+        account: null,
+        chainId: 0,
     },
     mutations: {
         setWeb3Modal(state, web3Modal) {
-            state.web3Modal.web3Modal = web3Modal
+            state.web3Modal = web3Modal
         },
-        setWeb3(state, web3) {
-            state.web3Modal.web3 = web3
+        setLibrary(state, library) {
+            state.library = library
         },
         setActive(state, active) {
-            state.web3Modal.active = active
+            state.active = active
         },
         setAccount(state, account) {
-            state.web3Modal.account = account
+            state.account = account
         },
         setChainId(state, chainId) {
-            state.web3Modal.web3Modal = chainId
+            state.chainId = chainId
         }
     },
     actions: {
         async connect({state, commit, dispatch}) {
-            const provider = await state.web3Modal.web3Modal.connect();
-            const web3 = new Web3(provider)
-            commit('setWeb3', web3)
-            const accounts = await web3.eth.getAccounts()
+            const provider = await state.web3Modal.connect();
+
+            const library = new ethers.providers.Web3Provider(provider)
+
+            library.pollingInterval = 12000
+            commit('setLibrary', library)
+
+            const accounts = await library.listAccounts()
             if (accounts.length > 0) {
                 commit('setAccount', accounts[0])
             }
-            const chainId = await web3.eth.getChainId()
-            commit('setChainId', chainId)
+            const network = await library.getNetwork()
+            commit('setChainId', network.chainId)
             commit('setActive', true)
 
             provider.on("connect", async (info) => {
+                let chainId = parseInt(info.chainId)
+                commit('setChainId', chainId)
                 console.log("connect", info)
             });
 
@@ -178,28 +152,30 @@ export default new Vuex.Store({
                 if (accounts.length > 0) {
                     commit('setAccount', accounts[0])
                 } else {
-                    commit('setAccount', null)
                     await dispatch('resetApp')
                 }
                 console.log("accountsChanged")
             });
             provider.on("chainChanged", async (chainId) => {
+                chainId = parseInt(chainId)
                 commit('setChainId', chainId)
-                console.log("chainChanged")
+                console.log("chainChanged", chainId)
             });
 
         },
         async resetApp({state, commit}) {
             try {
-                await state.web3Modal.web3Modal.clearCachedProvider();
+                await state.web3Modal.clearCachedProvider();
             } catch (error) {
                 console.error(error)
             }
             commit('setAccount', null)
             commit('setActive', false)
-        }
-    },
-})
+            commit('setLibrary', getLibrary())
+        },
+    }
+}
+export default web3ModalStore;
 ```
 
 ## Provider Options

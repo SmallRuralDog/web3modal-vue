@@ -7,9 +7,7 @@ import store from '@/store'
 export const getPredictionsContract = () => {
 
     const {library} = store.state.web3Modal
-
     const signer = library.getSigner()
-
     return getContract(predictionsAbi, process.env.VUE_APP_PREDICTION_CONTRACT_ADDRESS, signer)
 }
 
