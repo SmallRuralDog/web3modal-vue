@@ -1,13 +1,13 @@
 <template>
-
+<div></div>
 </template>
 
 <script>
 export default {
-  name: "Connect"
+  name: "Header"
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 
 </style>

@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <v-app id="app">
+    <Header/>
     <div>
       <router-view/>
     </div>
@@ -9,15 +10,17 @@
         :provider-options="providerOptions"
         cache-provider
     />
-  </div>
+  </v-app>
 </template>
 <script>
 import Web3ModalVue from "web3modal-vue";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {web3Modal} from "./config/mixins";
+import Header from "@/components/Header";
 
 export default {
   components: {
+    Header,
     Web3ModalVue
   },
   mixins: [web3Modal],
@@ -43,7 +46,7 @@ export default {
   },
   mounted() {
     this.$nextTick(async () => {
-      this.number = await this.web3Modal.web3.eth.getBlockNumber()
+      this.number = await this.web3Modal.library.getBlockNumber()
     })
     this.$nextTick(async () => {
       const web3modal = this.$refs.web3modal;
@@ -61,9 +64,7 @@ export default {
       this.subscribeMewBlockHeaders()
     },
     subscribeMewBlockHeaders() {
-      this.web3Modal.web3.eth.subscribe('newBlockHeaders', (err, block) => {
-        this.number = block.number
-      })
+
     },
     async getBalance() {
       let balance = await this.web3Modal.web3.eth.getBalance(this.web3Modal.account)

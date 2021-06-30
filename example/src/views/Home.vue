@@ -1,28 +1,18 @@
 <template>
   <div class="home">
-
+    <prediction/>
   </div>
 </template>
 
 <script>
 
 
-import {mapState} from "vuex";
+import Prediction from "@/views/Predictions/Prediction";
+
 
 export default {
   name: 'Home',
-  components: {},
-  computed: {
-    ...mapState['prediction']
-  },
-  mounted() {
-    this.getMarketData()
-  },
-  methods: {
-    getMarketData() {
-      this.$store.dispatch('getMarketData')
-    }
-  }
+  components: {Prediction},
 }
 </script>
 <style lang="scss">

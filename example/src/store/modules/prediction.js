@@ -1,13 +1,18 @@
-import {gql} from '@apollo/client';
-import {QglClient} from "@/utils/apollo";
+import {request, gql} from 'graphql-request'
 import {parseInt} from 'lodash'
+import {getOracleContract} from "@/utils/contract";
+import BigNumber from "bignumber.js";
+import {getBalanceAmount} from "@/utils/formatBalance";
+import {BIG_ZERO} from "@/utils/bigNumber";
+import {GRAPH_API_PREDICTION} from "@/config/endpoints";
 
 const predictionStore = {
     state: {
         marketData: {
             rounds: [],
             market: {}
-        }
+        },
+        price: BIG_ZERO,
     },
     getters: {},
     mutations: {
@@ -33,7 +38,6 @@ const predictionStore = {
                     position: e.position
                 }
             })
-
         },
         setMarket(state, payload) {
             state.marketData.market = {
@@ -41,11 +45,14 @@ const predictionStore = {
                 paused: payload.paused,
                 epoch: parseInt(payload.epoch.epoch),
             }
+        },
+        setPrice(state, payload) {
+            state.price = payload;
         }
     },
     actions: {
         async getMarketData({commit}) {
-            const gqlQuery = `
+            const query = gql`
               query getMarketData {
                 rounds(first: 5, orderBy: epoch, orderDirection: desc) {
                   ${getRoundBaseFields()}
@@ -59,12 +66,15 @@ const predictionStore = {
                 }
               }
             `
-
-            const {data: {market, rounds}} = await QglClient.query({query: gql(gqlQuery)})
-
+            const {market, rounds} = await request(GRAPH_API_PREDICTION, query)
             commit('setRounds', rounds)
             commit('setMarket', market)
-
+        },
+        async getLatestOraclePrice({commit}) {
+            const contract = getOracleContract()
+            const response = await contract.latestRoundData()
+            const price = getBalanceAmount(new BigNumber(response[1].toString()), 8)
+            commit('setPrice', price)
         }
     },
 }

@@ -1,12 +1,12 @@
-import {getWeb3NoAccount} from "@/utils/web3";
-import Web3 from "web3";
-import {getPredictionsContract} from "@/utils/contract";
+import {getLibrary} from "@/utils/web3";
+import {ethers} from "ethers";
 import {parseInt} from 'lodash'
 
 const web3ModalStore = {
     state: {
         web3Modal: null,
-        web3: getWeb3NoAccount(),
+
+        library: getLibrary(),
         active: false,
         account: null,
         chainId: 0,
@@ -15,8 +15,8 @@ const web3ModalStore = {
         setWeb3Modal(state, web3Modal) {
             state.web3Modal = web3Modal
         },
-        setWeb3(state, web3) {
-            state.web3 = web3
+        setLibrary(state, library) {
+            state.library = library
         },
         setActive(state, active) {
             state.active = active
@@ -31,14 +31,18 @@ const web3ModalStore = {
     actions: {
         async connect({state, commit, dispatch}) {
             const provider = await state.web3Modal.connect();
-            const web3 = new Web3(provider)
-            commit('setWeb3', web3)
-            const accounts = await web3.eth.getAccounts()
+
+            const library = new ethers.providers.Web3Provider(provider)
+
+            library.pollingInterval = 12000
+            commit('setLibrary', library)
+
+            const accounts = await library.listAccounts()
             if (accounts.length > 0) {
                 commit('setAccount', accounts[0])
             }
-            const chainId = await web3.eth.getChainId()
-            commit('setChainId', chainId)
+            const network = await library.getNetwork()
+            commit('setChainId', network.chainId)
             commit('setActive', true)
 
             provider.on("connect", async (info) => {
@@ -71,12 +75,7 @@ const web3ModalStore = {
             commit('setAccount', null)
             commit('setActive', false)
         },
-    },
-    getters: {
-        predictionsContract: state => {
-            return getPredictionsContract(state.web3)
-        }
-    },
+    }
 }
 
 export default web3ModalStore;

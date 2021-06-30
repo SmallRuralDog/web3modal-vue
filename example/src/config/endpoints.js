@@ -1,0 +1,1 @@
+export const GRAPH_API_PREDICTION = process.env.VUE_APP_THEGRAPH_URL
