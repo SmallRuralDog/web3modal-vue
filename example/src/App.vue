@@ -4,6 +4,7 @@
       <button @click="connect" v-if="!web3Modal.active">Connect</button>
       <div v-else>
         <div>{{ web3Modal.account }}</div>
+        <div>{{ web3Modal.chainId }}</div>
         <div>{{ number }}</div>
         <div>
           <button @click="getBalance">getBalance</button>
@@ -22,15 +23,13 @@
 <script>
 import Web3ModalVue from "web3modal-vue";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import {mapState} from "vuex";
+import {web3Modal} from "./config/mixins";
 
 export default {
   components: {
     Web3ModalVue
   },
-  computed: {
-    ...mapState(['web3Modal'])
-  },
+  mixins: [web3Modal],
   data() {
     return {
       theme: 'light',
@@ -58,8 +57,7 @@ export default {
     this.$nextTick(async () => {
       const web3modal = this.$refs.web3modal;
       this.$store.commit('setWeb3Modal', web3modal)
-      if (web3modal.cacheProvider) {
-        console.log(web3modal.cacheProvider)
+      if (web3modal.cachedProvider) {
         await this.$store.dispatch('connect')
         this.subscribeMewBlockHeaders()
       }
