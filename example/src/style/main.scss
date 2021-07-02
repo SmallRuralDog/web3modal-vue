@@ -1,0 +1,75 @@
+@import "base";
+@import "theme";
+@import "variable";
+@import "components";
+@import "vue_splide";
+
+// 主题变量map
+$theme-map: null;
+
+// 遍历主题map
+@mixin themed {
+  @each $theme-name, $theme-map in $themes {
+    $theme-map: $theme-map !global;
+    
+    //判断html的data-theme的属性值
+    //& sass嵌套里的父容器标识
+    [data-theme="#{$theme-name}"] & {
+      @content;
+    }
+  }
+}
+
+// 根据Key获取颜色
+@function get_color($key) {
+  @return map-get($theme-map, $key);
+}
+
+// 获取字体色
+@mixin color($name, $important:'') {
+  @include themed {
+    color: if($important=='',get_color($name), get_color($name) !important);
+  }
+}
+
+// 获取背景色
+@mixin background($name, $important:'') {
+  @include themed {
+    background: if($important=='',get_color($name), get_color($name) !important);
+  }
+}
+
+// 获取边框
+@mixin border($name) {
+  @include themed {
+    border-color: get_color($name);
+  }
+}
+
+// 获取阴影
+@mixin shadow($name:'shadow') {
+  @include themed {
+    box-shadow: get_color($name);
+  }
+}
+
+body {
+  //@include background('bg');
+  @include color("base");
+  overflow-y: scroll;
+  margin: 0 auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    @include background(card_hover_bg);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @include background(scroll_bar);
+    border-radius: 5px;
+  }
+}

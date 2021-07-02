@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;500;700&display=swap');
+
+// base settings
+html, body {
+  font-family: "Kanit", apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, 'PingFang SC', miui, 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  min-height: 100vh;
+  background: #F5F5F6;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}

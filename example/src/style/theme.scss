@@ -1,0 +1,29 @@
+$primary: var(--colorPrimary, #1DA1F2);
+$primary_hover: var(--colorPrimaryHover, rgba(29, 161, 242, 0.1));
+
+$themes: (
+  light: (
+    bg: #F5F5F6,
+    card_bg: #F7F9FA,
+    card_hover_bg: rgba(0,0,0,0.03),
+    base: #122B3E,
+    secondary: #5B7083,
+    divide: #EBEEF0,
+    primary: $primary,
+    primary_hover: $primary_hover,
+    scroll_bar: #67A8D2,
+    shadow: 3px 3px 10px rgba(0,0,0,0.26),
+  ),
+  dark: (
+    bg: #122B3E,
+    card_bg: #192734,
+    card_hover_bg: rgba(255,255,255,0.03),
+    base: #F5F5F6,
+    secondary: #8899A6,
+    divide: #38444D,
+    primary: $primary,
+    primary_hover: $primary_hover,
+    scroll_bar: #5f708a,
+    shadow: 3px 3px 10px rgba(255,255,255,0.2),
+  )
+)

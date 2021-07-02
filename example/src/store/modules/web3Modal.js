@@ -22,7 +22,7 @@ const web3ModalStore = {
             state.active = active
         },
         setAccount(state, account) {
-            state.account = account
+            state.account = account.toLowerCase()
         },
         setChainId(state, chainId) {
             state.chainId = chainId

@@ -50,16 +50,13 @@ export default {
       const web3modal = this.$refs.web3modal;
       this.$store.commit('setWeb3Modal', web3modal)
       if (web3modal.cachedProvider) {
-        await this.$store.dispatch('connect')
-        this.subscribeMewBlockHeaders()
+        this.connect()
       }
-
     })
   },
   methods: {
     connect() {
       this.$store.dispatch('connect')
-
     },
   }
 }

@@ -1,0 +1,8 @@
+.y-card {
+  flex-grow: 1;
+  width: 20%;
+  max-width: calc(100% - #{$space2 * 2});
+  border-radius: $space2;
+  min-width: 275px;
+  overflow: hidden;
+}
