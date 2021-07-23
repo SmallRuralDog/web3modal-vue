@@ -2,7 +2,7 @@ import {getChainId} from "../../helpers";
 
 
 const ConnectToWalletConnect = (WalletConnectProvider, opts) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         let bridge = "https://bridge.walletconnect.org";
         let qrcode = true;
         let infuraId = "";
@@ -29,7 +29,8 @@ const ConnectToWalletConnect = (WalletConnectProvider, opts) => {
             qrcodeModalOptions
         });
         try {
-            resolve(provider.enable());
+            await provider.enable()
+            resolve(provider);
         } catch (e) {
             reject(e);
         }
