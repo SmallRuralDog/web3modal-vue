@@ -1,9 +1,8 @@
 {
   "name": "web3modal-vue",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A single Web3 / Ethereum provider solution for all Wallets",
   "main": "./src/Web3ModalVue.vue",
-  "private": false,
   "keywords": [
     "web3",
     "web3vue",
