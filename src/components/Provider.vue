@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import styled from 'vue-styled-components'
+import styled from 'vue3-styled-components'
 import {
   PROVIDER_WRAPPER_CLASSNAME,
   PROVIDER_CONTAINER_CLASSNAME,

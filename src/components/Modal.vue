@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import styled from 'vue-styled-components'
+import styled from 'vue3-styled-components'
 import {
   MODAL_LIGHTBOX_CLASSNAME,
   MODAL_CONTAINER_CLASSNAME,

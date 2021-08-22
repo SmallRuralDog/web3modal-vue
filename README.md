@@ -2,6 +2,10 @@
 
 A single Web3 / Ethereum provider solution for all Wallets
 
+## Origins
+
+Forked for Vue3 compatibility from the excellent work done by @SmallRuralDog, whose original *web3modal-vue* package may be found at https://github.com/SmallRuralDog/web3modal-vue.
+
 ## Introduction
 
 Web3Modal is an easy-to-use library to help developers add support for multiple providers in their apps with a simple customizable configuration.
@@ -16,11 +20,11 @@ By default Web3Modal Library supports injected providers like (**Metamask**, **D
 1. Install Web3Modal NPM package
 
 ```bash
-npm install --save web3modal-vue
+npm install --save web3modal-vue3
 
 # OR
 
-yarn add web3modal-vue
+yarn add web3modal-vue3
 ```
 
 2. Install Provider packages
@@ -43,7 +47,7 @@ yarn add web3modal-vue
   </div>
 </template>
 <script>
-import Web3ModalVue from "web3modal-vue";
+import Web3ModalVue from "web3modal-vue3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {web3Modal} from "./config/mixins";
 import Header from "@/components/Header";

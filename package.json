@@ -1,6 +1,6 @@
 {
-  "name": "web3modal-vue",
-  "version": "1.0.4",
+  "name": "web3modal-vue3",
+  "version": "1.0.0",
   "description": "A single Web3 / Ethereum provider solution for all Wallets",
   "main": "./src/Web3ModalVue.vue",
   "private": false,
@@ -19,23 +19,24 @@
     "arkane",
     "torus",
     "authereum",
-    "frame"
+    "frame",
+    "vue3"
   ],
   "files": [
     "src"
   ],
-  "author": "SmallRuralDog",
+  "author": "mfw78",
   "license": "MIT",
-  "homepage": "https://github.com/SmallRuralDog/web3modal-vue",
+  "homepage": "https://github.com/mfw78/web3modal-vue3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SmallRuralDog/web3modal-vue.git"
+    "url": "https://github.com/mfw78/web3modal-vue3.git"
   },
   "bugs": {
-    "url": "https://github.com/SmallRuralDog/web3modal-vue/issues"
+    "url": "https://github.com/mfw78/web3modal-vue3/issues"
   },
   "dependencies": {
     "detect-browser": "^5.2.0",
-    "vue-styled-components": "^1.6.0"
+    "vue3-styled-components": "^1.2.1"
   }
 }
