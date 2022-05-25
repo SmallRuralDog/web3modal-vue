@@ -226,5 +226,17 @@ export const CHAIN_DATA_LIST = {
         chain: "ARTIS tau1",
         network: "artis-t1",
         networkId: 246785
+    },
+    25: {
+        chainId: 25,
+        chain: "CRONOS",
+        network: "cronos",
+        networkId: 25
+    },
+    338: {
+        chainId: 338,
+        chain: "CRONOS",
+        network: "cronos-testnet",
+        networkId: 338
     }
 };
