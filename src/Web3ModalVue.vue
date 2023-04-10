@@ -4,7 +4,7 @@
       :theme-colors="themeColors"
       :user-options="userOptions"
       :lightbox-opacity="lightboxOpacity"
-      @onClose="_toggleModal"
+      @onClose="onClose"
   />
 </template>
 
